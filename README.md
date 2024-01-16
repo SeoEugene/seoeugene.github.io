@@ -1,1 +1,0 @@
-# seoeugene.github.iodd
