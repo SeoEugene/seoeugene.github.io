@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="서유진 개발 포트폴리오. Vue 프론트엔드에서 시작해 풀스택 운영, LLM 에이전트용 MCP 서버와 RPA 파이프라인까지 만든 3년 차 개발자의 프로젝트.">
+<meta property="og:title" content="서유진 개발 포트폴리오">
+<meta property="og:description" content="서유진 개발 포트폴리오. Vue 프론트엔드에서 시작해 풀스택 운영, LLM 에이전트용 MCP 서버와 RPA 파이프라인까지 만든 3년 차 개발자의 프로젝트.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seoeugene.github.io/">
+<title>서유진 개발 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 블로그·문서형. 얇은 네이비 띠 → COVER LETTER(파란 카드 + ABOUT ME·KEYWORD) → RESUME(2단) → TIMELINE → PROJECT(프로젝트마다 왼쪽 정보 열 + 오른쪽 본문, 파란 소제목) */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --paper: #f7f8fb;
+  --navy: #0e2152;
+  --blue: #2b59d9;
+  --blue-soft: #edf2fd;
+  --sky: #9db4ee;
+  --ink: #1d2230;
+  --ink-2: #3a4152;
+  --muted: #7a8090;
+  --gray: #6b6e76;
+  --line: #e7e9ee;
+  --line-2: #cfd5df;
+  --head: "Space Grotesk", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.75; word-break: keep-all; overflow-wrap: anywhere; }
+.gutter { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 980px; margin: 0 auto; }
+h1, h2, h3 { margin: 0; text-wrap: balance; line-height: 1.35; }
+p { margin: 0; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 3px; }
+dl { margin: 0; }
+.lab { font-family: var(--head); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); }
+
+
+/* Hero banner */
+.hero { padding-top: 28px; }
+.hero .inner { background: var(--navy); color: #ffffff; position: relative; overflow: hidden; padding: 26px 32px 22px; display: grid; grid-template-rows: auto 1fr auto; min-height: clamp(320px, 52vw, 560px); }
+.h-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; position: relative; z-index: 2; }
+.h-lab { font-family: var(--head); font-size: 11.5px; font-weight: 600; letter-spacing: .16em; color: var(--sky); }
+.h-top nav { display: flex; gap: 4px 18px; flex-wrap: wrap; font-family: var(--head); font-size: 11.5px; font-weight: 600; letter-spacing: .1em; }
+.h-top nav a { text-decoration: none; color: #c9d5f6; }
+.h-top nav a:hover { color: #ffffff; }
+.h-globe { width: 30px; height: 30px; color: #ffffff; flex: none; }
+.h-mid { position: relative; display: grid; place-items: center; }
+.h-mid h1 { position: relative; z-index: 2; font-family: "Bagel Fat One", var(--head); font-weight: 400; font-size: clamp(64px, 14vw, 168px); line-height: 1; letter-spacing: -0.01em; color: #ffffff; display: flex; align-items: center; }
+.h-mid h1 span { display: inline-block; }
+.h-mid .l1 { transform: rotate(-8deg) translateY(6px); }
+.h-mid .l2 { transform: rotate(6deg) translateY(-8px) scale(.92); }
+.h-mid .l3 { transform: rotate(-4deg) translateY(4px); color: var(--sky); }
+.h-mid .l4 { transform: rotate(8deg) translateY(-6px) scale(1.08); }
+.h-mid .l5 { transform: rotate(-6deg) translateY(8px); }
+.h-mid .l6 { transform: rotate(4deg) translateY(-4px) scale(.9); }
+.h-mid .l7 { transform: rotate(-10deg) translateY(2px); color: var(--sky); }
+.h-mid .l8 { transform: rotate(6deg) translateY(-10px); }
+.h-mid .l9 { transform: rotate(-4deg) translateY(6px) scale(1.1); }
+.h-path { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; opacity: .85; }
+.h-plane { position: absolute; right: 6%; top: 14%; width: clamp(34px, 5vw, 56px); height: auto; transform: rotate(62deg); z-index: 2; }
+.h-star { position: absolute; z-index: 2; }
+.h-star.s1 { left: 22%; top: 18%; width: clamp(16px, 2.4vw, 26px); }
+.h-star.s2 { right: 24%; bottom: 20%; width: clamp(12px, 1.8vw, 18px); }
+.h-bot { display: flex; align-items: end; justify-content: space-between; gap: 16px; position: relative; z-index: 2; }
+.h-name { font-family: var(--head); font-size: 12.5px; font-weight: 600; letter-spacing: .08em; color: #c9d5f6; }
+.h-ticket { width: 34px; height: 20px; color: #ffffff; }
+.h-ticket { --cut: #0e2152; }
+@media (max-width: 760px) { .h-top nav { display: none; } .hero .inner { padding: 20px 18px 16px; } .h-star.s1 { left: 10%; } }
+
+/* Section header */
+.block { padding-block: 72px 8px; scroll-margin-top: 12px; }
+.sh { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+.sh h2 { font-family: var(--head); font-size: 15px; font-weight: 700; letter-spacing: .04em; color: var(--gray); text-transform: uppercase; }
+.sh svg { width: 30px; height: 18px; color: var(--gray); flex: none; }
+
+/* Cover letter */
+.cover { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 56px; align-items: start; }
+.cover > * { min-width: 0; }
+.photo { background: var(--blue); aspect-ratio: 1 / 1.08; max-width: 100%; display: grid; place-items: center; }
+.photo svg { width: 46%; height: auto; color: #ffffff; }
+.photo { overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+.idl { margin-top: 26px; display: grid; gap: 4px; font-size: 13.5px; }
+.idl div { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
+.idl dt { font-family: var(--head); font-weight: 700; font-size: 12.5px; color: var(--blue); letter-spacing: .02em; }
+.idl dd { margin: 0; color: var(--ink-2); }
+.about { display: grid; gap: 40px; padding-top: 4px; }
+.about .txt { display: grid; gap: 14px; margin-top: 16px; padding-left: 24px; font-size: 14px; color: var(--ink-2); max-width: 60ch; }
+.ovals { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; padding-left: 24px; }
+.oval { display: inline-grid; place-items: center; min-width: 92px; height: 44px; padding: 0 16px; border: 1px solid var(--blue); border-radius: 50%; font-size: 12.5px; color: var(--ink-2); white-space: nowrap; }
+@media (max-width: 760px) { .cover { grid-template-columns: minmax(0, 1fr); gap: 36px; } .photo { max-width: 260px; } .about .txt, .ovals { padding-left: 0; } }
+
+/* Resume */
+.rs { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; padding-left: 32px; }
+.rs > * { min-width: 0; }
+.rs h3 { margin-bottom: 18px; }
+.rs h3 + * { }
+.col { display: grid; gap: 40px; align-content: start; }
+.yl { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.co { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--line); }
+.co b { font-size: 16px; font-weight: 700; color: var(--ink); }
+.co span { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.yl > li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; font-size: 13.5px; }
+.yl ul li { display: list-item; padding-left: 2px; }
+.yl ul li::marker { color: var(--line-2); }
+.yl .y { font-family: var(--head); font-weight: 700; font-size: 14px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.yl b { display: block; font-weight: 600; font-size: 14px; color: var(--ink); }
+.yl ul { margin: 6px 0 0; padding-left: 16px; color: var(--ink-2); font-size: 13px; line-height: 1.75; display: grid; gap: 2px; }
+.tl3 { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 13px; }
+.tl3 li { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; align-items: baseline; }
+.tl3 .d { font-family: var(--mono); font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.tl3 .r { font-size: 12px; color: var(--muted); text-align: right; }
+.tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.tool { font-size: 11.5px; padding: 2px 11px; border: 1px solid var(--line-2); border-radius: 999px; color: var(--ink-2); background: #ffffff; }
+.nums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 48px; margin-left: 32px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.nums div { padding: 16px 18px; border-left: 1px solid var(--line); }
+.nums div:first-child { border-left: 0; padding-left: 0; }
+.nums b { display: block; font-family: var(--head); font-size: 22px; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
+.nums span { font-size: 12px; color: var(--muted); }
+@media (max-width: 760px) { .rs { grid-template-columns: minmax(0, 1fr); padding-left: 0; gap: 44px; } .nums { margin-left: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); } .nums div:nth-child(3) { border-left: 0; padding-left: 0; } .nums div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
+/* Timeline */
+.tl-wrap { padding-left: 32px; }
+.tl-track { position: relative; height: 130px; margin-bottom: 26px; }
+.tl-row { position: absolute; left: 0; right: 0; height: 22px; border-bottom: 1px dashed var(--line); }
+.tl-tick { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--line); }
+.tl-tick span { position: absolute; bottom: -24px; left: 0; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+.tl-tick.first span { transform: none; } .tl-tick.last span { transform: translateX(-100%); }
+.bar { position: absolute; height: 10px; border-radius: 999px; text-decoration: none; background: var(--blue); --c: var(--blue); }
+.bar.navy { background: var(--navy); --c: var(--navy); }
+.bar em { position: absolute; top: 50%; transform: translateY(-50%); font-style: normal; font-size: 12.5px; font-weight: 500; white-space: nowrap; color: var(--ink-2); }
+.bar.r em { left: calc(100% + 10px); } .bar.l em { right: calc(100% + 10px); }
+.bar.hatch { background: repeating-linear-gradient(135deg, var(--c) 0 2px, transparent 2px 5px); box-shadow: inset 0 0 0 1px var(--c); }
+.bar.ghost { background: transparent; box-shadow: inset 0 0 0 1px var(--c); }
+.tl-key { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 12px; color: var(--muted); }
+.tl-key span { display: inline-flex; align-items: center; gap: 8px; }
+.tl-key i { width: 20px; height: 8px; border-radius: 999px; display: inline-block; }
+@media (max-width: 760px) { .tl-wrap { padding-left: 0; } .bar em { display: none; } }
+
+/* Project */
+.project { padding-block: 56px 8px; scroll-margin-top: 12px; border-top: 1px solid var(--line); }
+.project:first-of-type { border-top: 0; }
+.project .inner { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 48px; align-items: start; }
+.project .inner > * { min-width: 0; }
+.p-side { display: grid; gap: 18px; padding-top: 4px; }
+.p-card { border-top: 2px solid var(--blue); padding-top: 12px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.p-card span { font-family: var(--head); font-size: 11.5px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+.p-card b { font-family: var(--head); font-weight: 700; font-size: 18px; letter-spacing: .02em; color: var(--blue); }
+.p-card.navy { border-top-color: var(--navy); }
+.p-card.navy b { color: var(--navy); }
+.p-side .idl { margin-top: 0; }
+.p-side .idl div { grid-template-columns: 70px minmax(0, 1fr); }
+.p-main { display: grid; gap: 44px; }
+.p-head h2 { font-size: clamp(22px, 3vw, 28px); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+.p-head .sum { margin-top: 14px; font-size: 14.5px; color: var(--ink-2); max-width: 64ch; }
+.p-head .note { margin-top: 12px; font-size: 13.5px; color: var(--muted); max-width: 64ch; padding-left: 12px; border-left: 2px solid var(--line-2); }
+@media (max-width: 860px) { .project .inner { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+
+.sec { display: grid; gap: 16px; }
+.sec h3 { font-family: var(--head); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); display: flex; align-items: baseline; gap: 10px; }
+.sec h3 small { font-family: var(--body); font-weight: 500; font-size: 12.5px; color: var(--muted); letter-spacing: 0; text-transform: none; }
+.sec > :not(h3) { margin-left: 0; }
+
+.features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; border-top: 1px solid var(--line); }
+.feature { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; align-content: start; }
+.feature b { font-size: 14px; font-weight: 600; display: flex; align-items: baseline; gap: 8px; color: var(--ink); }
+.feature p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.feature .own { margin-left: auto; font-size: 11px; font-weight: 500; color: var(--blue); border: 1px solid var(--blue); border-radius: 999px; padding: 0 8px; white-space: nowrap; }
+.feature .own.team { color: var(--muted); border-color: var(--line-2); }
+@media (max-width: 560px) { .features { grid-template-columns: minmax(0, 1fr); } }
+
+.arch { border: 1px solid var(--line); background: var(--paper); overflow: hidden; margin: 0; }
+.arch .scroll { overflow-x: auto; padding: 18px; }
+.arch svg { display: block; width: 100%; min-width: 720px; height: auto; }
+.arch .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 10px 18px; border-top: 1px solid var(--line); background: #ffffff; font-size: 12px; color: var(--muted); }
+.arch .legend span { display: inline-flex; align-items: center; gap: 8px; }
+.arch .legend i { width: 15px; height: 10px; border-radius: 2px; display: inline-block; }
+.lg-mine { background: #e9effc; border: 1.5px solid #2b59d9; }
+.lg-part { background: #ffffff; border: 1.5px dashed #2b59d9; }
+.lg-team { background: #ffffff; border: 1px solid #cbd3e1; }
+.lg-ext { background: #edf0f5; border: 1px dashed #cbd3e1; }
+svg text { font-family: var(--body); fill: var(--ink); }
+svg .t { font-size: 13.5px; font-weight: 600; }
+svg .s { font-size: 11px; fill: var(--muted); font-family: var(--mono); }
+svg .k { font-size: 10.5px; font-family: var(--mono); font-weight: 500; }
+svg .col { font-size: 10.5px; font-family: var(--head); font-weight: 700; fill: #2b59d9; letter-spacing: .12em; }
+svg .team { fill: #ffffff; stroke: #cbd3e1; stroke-width: 1; }
+svg .ext { fill: #edf0f5; stroke: #cbd3e1; stroke-width: 1; stroke-dasharray: 4 3; }
+svg .e { stroke: #8a93a6; stroke-width: 1.2; fill: none; }
+svg .e.d { stroke-dasharray: 4 3; }
+svg .el { font-size: 10.5px; fill: var(--muted); font-family: var(--mono); }
+
+.stack { display: grid; }
+.stack > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 8px 0; align-items: baseline; }
+.stack dt { font-size: 12.5px; color: var(--muted); }
+.stack dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 11.5px; padding: 2px 11px; border-radius: 999px; background: #ffffff; border: 1px solid var(--line-2); color: var(--ink-2); }
+.chip.lang { border-color: var(--blue); color: var(--blue); font-weight: 600; }
+
+.probs { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.prob { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.prob .q { color: var(--ink-2); }
+.prob .q::before { content: "문제"; display: block; font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
+.prob .a { color: var(--ink); }
+.prob .a::before { content: "해결"; display: block; font-size: 11px; color: var(--blue); font-weight: 600; margin-bottom: 2px; }
+@media (max-width: 560px) { .prob { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+
+.log { font-family: var(--mono); font-size: 12px; line-height: 1.7; background: var(--paper); border: 1px solid var(--line); color: var(--ink-2); padding: 14px 16px; overflow-x: auto; }
+.log ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.log li { white-space: nowrap; }
+.log time { color: var(--muted); margin-right: 14px; }
+.log .h { color: var(--blue); margin-right: 10px; }
+
+.bf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; padding-left: 32px; }
+.bf-item { padding: 18px 0 20px; border-top: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
+.bf-item.main { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr); border-top: 2px solid var(--blue); padding-bottom: 28px; }
+.bf-item.main h3 { font-size: 19px; }
+.bf-item.main p { font-size: 14px; max-width: 70ch; }
+.bf-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.bf-top .d { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.bf-item h3 { font-size: 15px; font-weight: 600; color: var(--ink); }
+.bf-item p { font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+.bf-item p a { color: var(--blue); }
+@media (max-width: 860px) { .bf { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-left: 0; } }
+@media (max-width: 560px) { .bf { grid-template-columns: minmax(0, 1fr); } }
+.ed-intro { font-size: 14px; color: var(--ink-2); padding-left: 32px; margin-top: -16px; }
+.ed-intro a, .links a, .feature p a { color: var(--blue); }
+.ed-feature { border-top: 2px solid var(--blue); padding: 14px 0 4px; display: grid; gap: 10px; }
+.ed-feature p { font-size: 13.5px; color: var(--ink-2); max-width: 66ch; }
+.ed-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; border-top: 1px solid var(--line); }
+.ed-card { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; gap: 8px; align-content: start; }
+.ed-card p { font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+.links { display: flex; gap: 14px; font-size: 12.5px; }
+.links a { text-decoration: none; border-bottom: 1px solid currentColor; }
+.ed-teaser { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-left: 32px; padding: 22px 24px; border: 1px solid var(--line); text-decoration: none; background: var(--paper); }
+.ed-teaser:hover { border-color: var(--blue); }
+.ed-teaser div { display: grid; gap: 4px; }
+.ed-teaser b { font-size: 16px; font-weight: 600; color: var(--ink); }
+.ed-teaser p { font-size: 13px; color: var(--muted); }
+.ed-teaser .go { font-family: var(--head); font-weight: 700; font-size: 13px; color: var(--blue); white-space: nowrap; }
+@media (max-width: 760px) { .ed-intro, .ed-teaser { padding-left: 0; margin-left: 0; } .ed-teaser { padding: 18px; } .ed-grid { grid-template-columns: minmax(0, 1fr); } }
+footer { padding-block: 72px 56px; margin-top: 72px; border-top: 1px solid var(--line); }
+footer .inner { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+footer b { font-family: var(--head); color: var(--ink); font-size: 15px; letter-spacing: .02em; }
+footer svg { width: 30px; height: 18px; color: var(--gray); }
+
+</style>
+<style>
+html { -webkit-text-size-adjust: 100%; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ticket" viewBox="0 0 30 18"><path fill="currentColor" d="M0 0h30v6a3 3 0 0 0 0 6v6H0v-6a3 3 0 0 0 0-6z"/><circle cx="15" cy="9" r="3.2" style="fill:var(--cut,#ffffff)"/><rect x="5" y="7.6" width="6" height="2.8" rx="1.4" style="fill:var(--cut,#ffffff)"/><rect x="19" y="7.6" width="6" height="2.8" rx="1.4" style="fill:var(--cut,#ffffff)"/></symbol>
+    <symbol id="globe" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="13"/><ellipse cx="16" cy="16" rx="6" ry="13"/><path d="M3 16h26M5.5 9h21M5.5 23h21"/></g></symbol>
+    <symbol id="code" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="18" width="80" height="58" rx="8"/><path d="M10 30h80"/><circle cx="19" cy="24" r="1.6" fill="currentColor"/><circle cx="26" cy="24" r="1.6" fill="currentColor"/><path d="M38 44l-10 9 10 9M62 44l10 9-10 9M55 40l-10 26"/><path d="M34 88h32M50 76v12"/></g></symbol>
+  </defs>
+</svg>
+
+<header class="hero gutter">
+  <div class="inner">
+    <div class="h-top">
+      <span class="h-lab">FRONTEND · FULLSTACK · AI BACKEND</span>
+      <nav aria-label="섹션"><a href="#cover">COVER LETTER</a><a href="#resume">RESUME</a><a href="#project">PROJECT</a><a href="#education">EDUCATION</a></nav>
+      <svg class="h-globe" aria-hidden="true"><use href="#globe"/></svg>
+    </div>
+    <div class="h-mid">
+      <svg class="h-path" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M70 330 C 170 420, 300 380, 330 300 S 250 150, 140 190" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-dasharray="6 9" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <path d="M690 250 C 760 150, 830 110, 905 95" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-dasharray="6 9" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <svg class="h-plane" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffffff" d="M21.5 15.5v-2l-8-5V3.6c0-.9-.7-1.6-1.5-1.6s-1.5.7-1.5 1.6v4.9l-8 5v2l8-2.5v5.4l-2 1.5v1.6l3.5-1 3.5 1v-1.6l-2-1.5V13z"/></svg>
+      <svg class="h-star s1" viewBox="0 0 20 20" aria-hidden="true"><path fill="#ffffff" d="M10 0l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/></svg>
+      <svg class="h-star s2" viewBox="0 0 20 20" aria-hidden="true"><path fill="#9db4ee" d="M10 0l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/></svg>
+      <h1 aria-label="portfolio"><span class="l1">p</span><span class="l2">o</span><span class="l3">r</span><span class="l4">t</span><span class="l5">f</span><span class="l6">o</span><span class="l7">l</span><span class="l8">i</span><span class="l9">o</span></h1>
+    </div>
+    <div class="h-bot">
+      <span class="h-name">SEO YUJIN · Developer Portfolio</span>
+      <svg class="h-ticket" aria-hidden="true"><use href="#ticket"/></svg>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="block gutter" id="cover" aria-labelledby="cv-h">
+  <div class="inner">
+    <div class="sh"><h2 id="cv-h">Cover letter</h2><svg aria-hidden="true"><use href="#ticket"/></svg></div>
+    <div class="cover">
+      <div>
+        <div class="photo"><img src="assets/profile.jpg" alt="서유진 프로필 사진" width="669" height="720"></div>
+        <dl class="idl">
+          <div><dt>NAME</dt><dd>서유진 (SEO YUJIN)</dd></div>
+          <div><dt>ROLE</dt><dd>Backend · AI 연동 개발자</dd></div>
+          <div><dt>CAREER</dt><dd>포니링크 · 2024.02.19 – 재직 중</dd></div>
+          <div><dt>MAIL</dt><dd>97.eugene.s@gmail.com</dd></div>
+          <div><dt>GITHUB</dt><dd><a href="https://github.com/SeoEugene" target="_blank" rel="noopener">github.com/SeoEugene</a></dd></div>
+        </dl>
+      </div>
+      <div class="about">
+        <div>
+          <h3 class="lab">About me</h3>
+          <div class="txt">
+            <p>안녕하세요. 넘겨받은 시스템도, 처음 만드는 시스템도 끝까지 돌아가게 만드는 개발자 서유진입니다.</p>
+            <p>Vue 3 프론트엔드로 시작했습니다. 인수인계 없이 넘겨받은 국가 R&amp;D 에너지 거래 플랫폼을 혼자 운영하며 공인시험과 최종평가를 통과시켰고, 화면부터 SQL, Java 배치, 블록체인 연동까지 전 구간을 다뤘습니다.</p>
+            <p>지금은 LLM 에이전트가 사내 ERP와 메일을 사용자 권한 안에서만 조회하도록 MCP 서버를 만들고, Windows 업무 프로그램에서 데이터를 자동으로 가져오는 RPA 파이프라인을 구축하고 있습니다.</p>
+          </div>
+        </div>
+        <div>
+          <h3 class="lab">Keyword</h3>
+          <div class="ovals"><span class="oval">끝까지 책임</span><span class="oval">레거시 복구</span><span class="oval">권한 설계</span><span class="oval">LLM 도구</span><span class="oval">풀스택</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block gutter" id="resume" aria-labelledby="rs-h">
+  <div class="inner">
+    <div class="sh"><h2 id="rs-h">Resume</h2><svg aria-hidden="true"><use href="#ticket"/></svg></div>
+    <div class="rs">
+      <div class="col">
+        <div>
+          <h3 class="lab">Experience</h3>
+          <div class="co"><b>포니링크</b><span>2024.02.19 – 재직 중 · 개발</span></div>
+          <ol class="yl">
+            <li><span class="y">2026</span><div><b>그룹사 AI 업무자동화 플랫폼</b><ul><li>ERP 조회 MCP 서버 주담당 (권한 확인·감사 로그)</li><li>메일 검색 MCP 서버</li><li>Windows RPA 수집 파이프라인 신규 구축</li><li>제약사 CSO 실적관리 화면·API</li></ul></div></li>
+            <li><span class="y">2025</span><div><b>멀티 LLM AI 채팅 플랫폼</b><ul><li>사용자 웹 구조 처음부터 구축</li><li>SSE 스트리밍 응답, 이미지 생성 채팅</li></ul></div></li>
+            <li><span class="y">2024</span><div><b>산업단지 에너지 공유거래 플랫폼 (국가 R&amp;D)</b><ul><li>인수인계 없이 인수, 2024.10부터 단독 운영</li><li>거래·중개거래·정산·청구 흐름 정상화, 블록체인 연동</li><li>TTA 공인시험 대응, 2026.03 최종평가 통과</li></ul></div></li>
+            <li><span class="y">2024</span><div><b>대형 통신사 패스키 관리자 포털</b><ul><li>입사 후 첫 프로젝트, Vue 3 관리 화면</li><li>권한 확인 공통화, 게시판 공통 컴포넌트</li></ul></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <h3 class="lab">Education</h3>
+          <ol class="tl3">
+            <li><span class="d">2026.03</span><span>성신여자대학교 재학 중</span><span class="r">경영학과</span></li>
+            <li><span class="d">2021.02</span><span>안산대학교 졸업</span><span class="r">IT응용보안<br>4.23 / 4.5</span></li>
+            <li><span class="d">2016.02</span><span>경일관광경영고 졸업</span><span class="r">금융정보</span></li>
+          </ol>
+        </div>
+        <div>
+          <h3 class="lab">Training</h3>
+          <ol class="tl3">
+            <li><span class="d">2024.02</span><span>공공 데이터를 활용한 Node.js 전문가</span><span class="r">6개월</span></li>
+            <li><span class="d">2021.07</span><span>자바 파이썬을 활용한 머신러닝 개발자</span><span class="r">6개월</span></li>
+          </ol>
+        </div>
+        <div>
+          <h3 class="lab">Certificate</h3>
+          <ol class="tl3">
+            <li><span class="d">2023.12</span><span>웹디자인기능사</span><span></span></li>
+            <li><span class="d">2022.06</span><span>정보처리산업기사</span><span></span></li>
+            <li><span class="d">2021.10</span><span>SQL 개발자 (SQLD)</span><span></span></li>
+            <li><span class="d">2021.07</span><span>리눅스마스터 2급</span><span></span></li>
+            <li><span class="d">2021.05</span><span>정보처리기능사</span><span></span></li>
+            <li><span class="d">2014.06</span><span>ERP 정보관리사 2급</span><span></span></li>
+          </ol>
+        </div>
+        <div>
+          <h3 class="lab">Tools</h3>
+          <div class="tools"><span class="tool">Python</span><span class="tool">JavaScript</span><span class="tool">TypeScript</span><span class="tool">Java</span><span class="tool">SQL</span><span class="tool">FastAPI</span><span class="tool">MCP SDK</span><span class="tool">Vue 3</span><span class="tool">Express</span><span class="tool">Spring Boot</span><span class="tool">Oracle</span><span class="tool">PostgreSQL</span><span class="tool">MySQL</span><span class="tool">Keycloak</span><span class="tool">Docker</span><span class="tool">GitLab CI</span><span class="tool">Hyperledger Fabric</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="nums" aria-label="주요 숫자">
+      <div><b>~460</b><span>커밋 (merge 제외)</span></div>
+      <div><b>317억</b><span>국가 R&amp;D 과제 규모</span></div>
+      <div><b>100%</b><span>TTA 공인시험 정확도 (대응)</span></div>
+      <div><b>440+</b><span>MCP 서버 테스트</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block gutter" aria-labelledby="tl-h">
+  <div class="inner">
+    <div class="sh"><h2 id="tl-h">Timeline</h2><svg aria-hidden="true"><use href="#ticket"/></svg></div>
+    <div class="tl-wrap">
+      <div class="tl-track" role="img" aria-label="2024년 2월부터 2026년 12월까지 프로젝트 기간">
+        <div class="tl-row" style="top:4px"></div><div class="tl-row" style="top:36px"></div><div class="tl-row" style="top:68px"></div><div class="tl-row" style="top:100px"></div>
+        <div class="tl-tick first" style="left:0%"><span>2024.02</span></div>
+        <div class="tl-tick" style="left:32.35%"><span>2025.01</span></div>
+        <div class="tl-tick" style="left:67.65%"><span>2026.01</span></div>
+        <div class="tl-tick last" style="left:100%"><span>2026.12</span></div>
+        <a class="bar r navy" href="#passkey" style="top:16px;left:2.94%;width:11.76%"><em>패스키 포털</em></a>
+        <a class="bar navy" href="#energy" style="top:48px;left:14.71%;width:41.18%" aria-label="에너지 거래 플랫폼"></a>
+        <a class="bar r navy hatch" href="#energy" style="top:48px;left:55.88%;width:20.59%"><em>에너지 거래 플랫폼</em></a>
+        <a class="bar l" href="#llm" style="top:80px;left:61.76%;width:8.82%"><em>멀티 LLM</em></a>
+        <a class="bar ghost" href="#ax" style="top:112px;left:73.53%;width:11.76%" aria-label="AI 업무자동화 준비"></a>
+        <a class="bar l" href="#ax" style="top:112px;left:85.29%;width:14.12%"><em>AI 업무자동화</em></a>
+      </div>
+      <div class="tl-key"><span><i style="background:#0e2152"></i>개발·운영</span><span><i style="background:repeating-linear-gradient(135deg,#0e2152 0 2px,transparent 2px 5px);box-shadow:inset 0 0 0 1px #0e2152"></i>과제 문서 작성·최종평가</span><span><i style="box-shadow:inset 0 0 0 1px #2b59d9"></i>준비 기간</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block gutter" id="project" aria-labelledby="pj-h" style="padding-bottom:0">
+  <div class="inner">
+    <div class="sh" style="margin-bottom:0"><h2 id="pj-h">Project</h2><svg aria-hidden="true"><use href="#ticket"/></svg></div>
+  </div>
+</section>
+
+<!-- ================= AX ================= -->
+<section class="project gutter" id="ax">
+  <div class="inner">
+    <aside class="p-side">
+      <div class="p-card"><span>PROJECT</span><b>AX-26</b></div>
+      <dl class="idl"><div><dt>PERIOD</dt><dd>2026.07 – 진행 중</dd></div><div><dt>ROLE</dt><dd>백엔드 · AI 연동</dd></div><div><dt>TEAM</dt><dd>약 8~10명</dd></div><div><dt>PART</dt><dd>ERP MCP 주담당, RPA 신규 구축</dd></div><div><dt>COMMIT</dt><dd>약 70건 · 저장소 6개</dd></div></dl>
+    </aside>
+    <div class="p-main">
+      <div class="p-head">
+        <h2>그룹사 AI 업무자동화 플랫폼</h2>
+        <p class="sum">직원이 채팅으로 ERP 매출과 출하를 묻고, 보고서를 받고, 메일을 찾을 수 있도록 LLM 에이전트에 사내 시스템을 MCP 도구로 연결하는 플랫폼입니다. ERP 조회 MCP 서버를 주로 맡았고, Windows 업무 프로그램에서 데이터를 자동으로 가져오는 RPA 파이프라인을 처음부터 만들었습니다.</p>
+          <p class="note">계열사 두 곳에 납품할 계획으로 시작했지만 요구사항이 서로 달랐고, 한 곳은 계약이 성사되지 않았습니다. 남은 제약사 고객에 맞춰 범위를 다시 잡아 진행하고 있습니다.</p>
+      </div>
+
+    <div class="sec">
+      <h3>서비스 기능<small>Features</small></h3>
+      <div class="features">
+        <div class="feature"><b>채팅으로 ERP 조회<span class="own">담당</span></b><p>"이번 달 우리 부서 매출"처럼 물으면 매출 조회 프로시저 20여 개 중 맞는 것을 골라 실행합니다.</p></div>
+        <div class="feature"><b>영업 보고서<span class="own">담당</span></b><p>일·주·월·분기 매출 보고서와 3개월 추이, 담당자별 목표 대비 실적을 표와 차트로 만듭니다.</p></div>
+        <div class="feature"><b>권한 안에서만 조회<span class="own">담당</span></b><p>재직 여부와 ERP 화면 권한, 매출 범위 권한을 확인하고, 하나라도 실패하면 조회하지 않습니다.</p></div>
+        <div class="feature"><b>메일 검색<span class="own">담당</span></b><p>사용자를 그룹웨어 메일함에 연결해 본인 메일만 찾습니다. 휴지통과 스팸은 뺍니다.</p></div>
+        <div class="feature"><b>업무 프로그램 자동 수집<span class="own">담당</span></b><p>고객사의 Windows 프로그램을 자동으로 조작해 처방·매출 자료를 받아 DB에 쌓습니다.</p></div>
+        <div class="feature"><b>CSO 실적관리<span class="own">일부</span></b><p>제약사 전용 화면. 원천 자료 동기화, 필터링, 흡수율 화면과 API를 만들었습니다.</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>시스템 아키텍처<small>Architecture</small></h3>
+      <figure class="arch" style="margin:0">
+        <div class="scroll">
+          <svg viewBox="0 0 1000 430" role="img" aria-labelledby="ax-t">
+            <title id="ax-t">AI 업무자동화 플랫폼 구성도. 사용자 웹과 Core API, LLM 에이전트가 ERP·메일 MCP 서버를 거쳐 ERP와 메일에 접근하고, Worker와 Windows RPA Agent가 업무 프로그램 자료를 수집한다.</title>
+            <defs><marker id="m4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7d8aa5"/></marker></defs>
+            <text class="col" x="20" y="18">CLIENT</text>
+            <text class="col" x="230" y="18">PLATFORM</text>
+            <text class="col" x="480" y="18">MCP TOOLS · AGENT</text>
+            <text class="col" x="760" y="18">DATA · SYSTEMS</text>
+
+            <!-- client -->
+            <rect x="20" y="36" width="170" height="64" rx="8" fill="#ffffff" stroke="#2b59d9" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <text class="t" x="34" y="62">User Web</text><text class="s" x="34" y="82">Vue 3 · TypeScript</text>
+            <rect x="20" y="146" width="170" height="56" rx="8" class="ext"/>
+            <text class="t" x="34" y="170">Keycloak</text><text class="s" x="34" y="188">SSO · JWT · JWKS</text>
+
+            <!-- platform -->
+            <rect x="230" y="36" width="200" height="64" rx="8" fill="#ffffff" stroke="#2b59d9" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <text class="t" x="244" y="62">Core API</text><text class="s" x="244" y="82">FastAPI · 인증 중계 · 확장</text>
+            <rect x="230" y="136" width="200" height="64" rx="8" class="team"/>
+            <text class="t" x="244" y="162">LLM 에이전트</text><text class="s" x="244" y="182">A.X · tool calling</text>
+            <rect x="230" y="256" width="200" height="64" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="244" y="282">Worker</text><text class="s" x="244" y="302">보고서 렌더 · RPA 작업 큐</text>
+
+            <!-- mcp -->
+            <rect x="480" y="36" width="230" height="76" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="494" y="60">ERP DB MCP</text>
+            <text class="s" x="494" y="79">토큰→사번→재직→권한</text>
+            <text class="s" x="494" y="96">감사 로그 · 마스킹</text>
+            <rect x="480" y="128" width="230" height="56" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="494" y="152">Email DB MCP</text><text class="s" x="494" y="170">사용자 → 메일함 매핑</text>
+            <rect x="480" y="200" width="230" height="44" rx="8" class="team"/>
+            <text class="t" x="494" y="227">외부 정보 MCP 10여 종</text>
+            <rect x="480" y="300" width="230" height="64" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="494" y="326">Windows RPA Agent</text><text class="s" x="494" y="346">pywinauto · FastAPI · exe</text>
+
+            <!-- data -->
+            <rect x="760" y="44" width="220" height="60" rx="8" class="ext"/>
+            <text class="t" x="774" y="69">ERP</text><text class="s" x="774" y="88">Oracle · 저장 프로시저</text>
+            <rect x="760" y="128" width="220" height="56" rx="8" class="ext"/>
+            <text class="t" x="774" y="152">그룹웨어 메일</text><text class="s" x="774" y="170">DB</text>
+            <rect x="760" y="244" width="220" height="56" rx="8" class="team"/>
+            <text class="t" x="774" y="268">PostgreSQL · MinIO</text><text class="s" x="774" y="286">작업 큐 · 원본 엑셀</text>
+            <rect x="760" y="308" width="220" height="56" rx="8" class="ext"/>
+            <text class="t" x="774" y="332">고객사 업무 프로그램</text><text class="s" x="774" y="350">Windows 전용</text>
+
+            <!-- edges -->
+            <path class="e" d="M190 68 H226" marker-end="url(#m4)"/>
+            <path class="e d" d="M190 174 H210 V88 H226" marker-end="url(#m4)"/>
+            <text class="el" x="196" y="128">JWT</text>
+            <path class="e" d="M330 100 V132" marker-end="url(#m4)"/>
+            <path class="e" d="M430 160 H452 V74 H476" marker-end="url(#m4)"/>
+            <path class="e" d="M452 156 H476" marker-end="url(#m4)"/>
+            <path class="e" d="M452 160 V222 H476" marker-end="url(#m4)"/>
+            <text class="el" x="436" y="128">tool call</text>
+            <path class="e" d="M710 74 H756" marker-end="url(#m4)"/>
+            <text class="el" x="716" y="66">읽기 전용</text>
+            <path class="e" d="M710 156 H756" marker-end="url(#m4)"/>
+            <path class="e" d="M430 272 H756" marker-end="url(#m4)"/>
+            <path class="e" d="M430 288 H462 V100 H476" marker-end="url(#m4)"/>
+            <text class="el" x="370" y="248">보고서 요청 → MCP</text>
+            <path class="e d" d="M480 338 H446 V308 H434" marker-end="url(#m4)"/>
+            <text class="el" x="436" y="356">polling</text>
+            <path class="e" d="M710 336 H756" marker-end="url(#m4)"/>
+            <text class="el" x="714" y="328">화면 자동 조작</text>
+
+            <rect x="20" y="392" width="960" height="30" rx="6" fill="#ffffff" stroke="#cbd3e1"/>
+            <text class="s" x="34" y="411">배포 · 보안</text>
+            <text class="k" x="130" y="411" fill="#2a3442">Docker · GitLab CI · Trivy 스캔 · Kubernetes · Vault · uv workspace</text>
+          </svg>
+        </div>
+        <figcaption class="legend"><span><i class="lg-mine"></i>내가 만든 부분</span><span><i class="lg-part"></i>일부 담당</span><span><i class="lg-team"></i>다른 팀원</span><span><i class="lg-ext"></i>외부·기존 시스템</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="sec">
+      <h3>기술 스택<small>Stack</small></h3>
+      <dl class="stack">
+        <div><dt>사용 언어</dt><dd><span class="chip lang">Python 3.13</span><span class="chip lang">TypeScript</span><span class="chip lang">SQL (Oracle · PostgreSQL)</span></dd></div>
+        <div><dt>AI · 에이전트</dt><dd><span class="chip">MCP Python SDK</span><span class="chip">A.X</span><span class="chip">도구 설명·응답 설계</span></dd></div>
+        <div><dt>서버</dt><dd><span class="chip">FastAPI</span><span class="chip">oracledb</span><span class="chip">psycopg</span><span class="chip">boto3</span></dd></div>
+        <div><dt>인증·보안</dt><dd><span class="chip">Keycloak</span><span class="chip">JWT / JWKS</span><span class="chip">Vault</span><span class="chip">감사 로그</span></dd></div>
+        <div><dt>자동화</dt><dd><span class="chip">pywinauto</span><span class="chip">openpyxl</span><span class="chip">MinIO</span><span class="chip">PyInstaller</span></dd></div>
+        <div><dt>화면</dt><dd><span class="chip">Vue 3</span><span class="chip">Pinia</span><span class="chip">Vite</span></dd></div>
+        <div><dt>품질·배포</dt><dd><span class="chip">pytest 약 440개</span><span class="chip">ruff</span><span class="chip">GitLab CI</span><span class="chip">Trivy</span><span class="chip">Docker</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="sec">
+      <h3>해결한 문제<small>Problems</small></h3>
+      <div class="probs">
+        <div class="prob"><p class="q">LLM이 질문에 다른 사람의 사번을 넣으면 남의 매출을 볼 수 있다</p><p class="a">사번을 도구 입력에서 받지 않고, 검증된 토큰에서만 꺼내도록 설계했습니다.</p></div>
+        <div class="prob"><p class="q">에이전트가 연결할 때 한 번만 인증하면 이후 호출을 믿을 수 없다</p><p class="a">연결 시점이 아니라 도구를 부를 때마다 JWT를 검증하도록 바꿨습니다.</p></div>
+        <div class="prob"><p class="q">고객사 Windows 서버가 방화벽 안에 있어 직접 호출할 수 없다</p><p class="a">Agent가 Worker에서 작업을 가져가 실행하고 결과를 올리는 polling 방식을 만들었습니다.</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>커밋 기록<small>Git log</small></h3>
+      <div class="log"><ol>
+        <li><time>2026-10-20</time><span class="h">erp-db-mcp</span>Keycloak token verification, caller checks and audit log</li>
+        <li><time>2026-10-29</time><span class="h">erp-db-mcp</span>verify the user JWT on tool calls, not on connect</li>
+        <li><time>2026-11-05</time><span class="h">rpa-agent</span>pull 실행 방식 추가, 자료매칭·조회조건 확인 모듈</li>
+        <li><time>2026-11-17</time><span class="h">erp-db-mcp</span>1차 매출 조회 20개 프로시저 추가와 전용 툴 정리</li>
+        <li><time>2026-11-23</time><span class="h">erp-db-mcp</span>기간 비교·개인정보 가림·우리 부서, 신제품·품절 예상 조회</li>
+      </ol></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Multi LLM ================= -->
+<section class="project gutter" id="llm">
+  <div class="inner">
+    <aside class="p-side">
+      <div class="p-card"><span>PROJECT</span><b>LM-25</b></div>
+      <dl class="idl"><div><dt>PERIOD</dt><dd>2025.11 – 2026.02</dd></div><div><dt>ROLE</dt><dd>프론트엔드</dd></div><div><dt>TEAM</dt><dd>약 5명 · 사내</dd></div><div><dt>PART</dt><dd>사용자 웹 구조, 채팅</dd></div><div><dt>COMMIT</dt><dd>30건</dd></div></dl>
+    </aside>
+    <div class="p-main">
+      <div class="p-head">
+        <h2>멀티 LLM AI 채팅 플랫폼</h2>
+        <p class="sum">GPT, Llama 같은 여러 모델을 한 화면에서 골라 쓰는 사내 AI 채팅 서비스입니다. 사용자 화면의 뼈대를 처음부터 만들고, 답변이 실시간으로 흘러나오는 스트리밍과 이미지 생성 채팅을 구현했습니다.</p>
+          <p class="note">국가 R&amp;D 과제의 최종평가 준비와 같은 시기에 병행했고, 서비스 오픈까지는 가지 못했습니다.</p>
+      </div>
+
+    <div class="sec">
+      <h3>서비스 기능<small>Features</small></h3>
+      <div class="features">
+        <div class="feature"><b>스트리밍 응답<span class="own">담당</span></b><p>SSE 스트림을 읽어 답변을 글자 단위로 보여 줍니다. 응답 중에는 입력과 모델 변경을 막습니다.</p></div>
+        <div class="feature"><b>이미지 생성 채팅<span class="own">담당</span></b><p>이미지 모델 전용 채팅, 만료된 이미지 주소의 대체 표시, 파일 끌어다 놓기 첨부.</p></div>
+        <div class="feature"><b>모델 선택과 추천<span class="own">담당</span></b><p>모델 목록을 불러오고, 일반 채팅에는 GPT-5, 이미지에는 DALL·E를 추천합니다.</p></div>
+        <div class="feature"><b>대화 히스토리<span class="own">담당</span></b><p>새 대화 후 목록 자동 갱신, 대화 제목 설정, 세션 전환 시 제목 반영.</p></div>
+        <div class="feature"><b>회원·인증<span class="own">담당</span></b><p>회원가입, 아이디·비밀번호 찾기와 재설정, 새로고침해도 유지되는 로그인.</p></div>
+        <div class="feature"><b>북마크·공유<span class="own team">팀</span></b><p>대화 북마크와 공유는 이후 팀원이 이어서 만들었습니다.</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>시스템 아키텍처<small>Architecture</small></h3>
+      <figure class="arch" style="margin:0">
+        <div class="scroll">
+          <svg viewBox="0 0 1000 330" role="img" aria-labelledby="llm-t">
+            <title id="llm-t">멀티 LLM 채팅 구성도. 사용자 웹이 API 게이트웨이를 거쳐 채팅·코어·플랫폼·에이전트 API를 부르고, 채팅 API가 OpenAI와 Ollama 모델을 호출한다.</title>
+            <defs><marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7d8aa5"/></marker></defs>
+            <text class="col" x="20" y="18">CLIENT</text><text class="col" x="270" y="18">GATEWAY</text><text class="col" x="500" y="18">SERVICES</text><text class="col" x="770" y="18">MODELS · INFRA</text>
+
+            <rect x="20" y="40" width="200" height="96" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="34" y="66">User Web</text>
+            <text class="s" x="34" y="86">Vue 3 · Pinia · Router</text>
+            <text class="s" x="34" y="104">SSE client · JWT 재발급</text>
+            <text class="s" x="34" y="122">marked · Lottie</text>
+            <rect x="20" y="190" width="200" height="56" rx="8" class="team"/>
+            <text class="t" x="34" y="214">Admin Web</text><text class="s" x="34" y="232">모델·사용자 관리</text>
+
+            <rect x="270" y="110" width="170" height="64" rx="8" class="team"/>
+            <text class="t" x="284" y="136">API Gateway</text><text class="s" x="284" y="156">인증 · 라우팅</text>
+
+            <rect x="500" y="34" width="210" height="48" rx="8" class="team"/><text class="t" x="514" y="63">Chat API</text>
+            <rect x="500" y="96" width="210" height="48" rx="8" class="team"/><text class="t" x="514" y="125">Core API</text>
+            <rect x="500" y="158" width="210" height="48" rx="8" class="team"/><text class="t" x="514" y="187">Platform API</text>
+            <rect x="500" y="220" width="210" height="48" rx="8" class="team"/><text class="t" x="514" y="249">Agent API · Worker</text>
+
+            <rect x="770" y="34" width="210" height="56" rx="8" class="ext"/><text class="t" x="784" y="58">OpenAI</text><text class="s" x="784" y="76">GPT-5 · DALL·E</text>
+            <rect x="770" y="104" width="210" height="56" rx="8" class="ext"/><text class="t" x="784" y="128">Ollama</text><text class="s" x="784" y="146">Llama (사내)</text>
+            <rect x="770" y="200" width="210" height="68" rx="8" class="team"/><text class="t" x="784" y="226">Kubernetes</text><text class="s" x="784" y="246">ArgoCD · GitLab CI</text>
+
+            <path class="e" d="M220 78 H246 V128 H266" marker-end="url(#m3)"/>
+            <text class="el" x="226" y="70">REST</text>
+            <path class="e d" d="M266 156 H240 V112 H224" marker-end="url(#m3)"/>
+            <text class="el" x="226" y="172">스트리밍 SSE</text>
+            <path class="e" d="M220 218 H252 V150 H266"/>
+            <path class="e" d="M440 142 H470 V58 H496" marker-end="url(#m3)"/>
+            <path class="e" d="M470 120 H496" marker-end="url(#m3)"/>
+            <path class="e" d="M470 142 V182 H496" marker-end="url(#m3)"/>
+            <path class="e" d="M470 182 V244 H496" marker-end="url(#m3)"/>
+            <path class="e" d="M710 58 H766" marker-end="url(#m3)"/>
+            <path class="e" d="M710 58 H740 V132 H766" marker-end="url(#m3)"/>
+
+            <rect x="20" y="290" width="960" height="30" rx="6" fill="#ffffff" stroke="#cbd3e1"/>
+            <text class="s" x="34" y="309">배포</text>
+            <text class="k" x="100" y="309" fill="#2a3442">Docker 이미지 → GitLab CI → ArgoCD → Kubernetes</text>
+          </svg>
+        </div>
+        <figcaption class="legend"><span><i class="lg-mine"></i>내가 만든 부분</span><span><i class="lg-team"></i>다른 팀원</span><span><i class="lg-ext"></i>외부 모델</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="sec">
+      <h3>기술 스택<small>Stack</small></h3>
+      <dl class="stack">
+        <div><dt>사용 언어</dt><dd><span class="chip lang">JavaScript</span><span class="chip lang">HTML · CSS</span></dd></div>
+        <div><dt>화면</dt><dd><span class="chip">Vue 3</span><span class="chip">Vue Router</span><span class="chip">Pinia</span><span class="chip">pinia-plugin-persistedstate</span></dd></div>
+        <div><dt>통신</dt><dd><span class="chip">fetch + ReadableStream (SSE)</span><span class="chip">axios</span><span class="chip">jwt-decode</span></dd></div>
+        <div><dt>표시</dt><dd><span class="chip">marked (마크다운)</span><span class="chip">SweetAlert2</span><span class="chip">Lottie</span></dd></div>
+        <div><dt>배포</dt><dd><span class="chip">Docker</span><span class="chip">GitLab CI</span><span class="chip">ArgoCD</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="sec">
+      <h3>해결한 문제<small>Problems</small></h3>
+      <div class="probs">
+        <div class="prob"><p class="q">스트림이 조각나 도착해 한 이벤트가 두 번에 나뉘어 들어온다</p><p class="a">버퍼에 이어 붙인 뒤 완성된 이벤트만 꺼내고 나머지는 다음 조각과 합쳐 처리했습니다.</p></div>
+        <div class="prob"><p class="q">스트리밍 도중 토큰이 만료되면 답변이 끊긴다</p><p class="a">401이 오면 토큰을 재발급받아 같은 요청을 한 번 다시 보내도록 했습니다.</p></div>
+        <div class="prob"><p class="q">생성된 이미지 주소가 시간이 지나면 만료된다</p><p class="a">히스토리에서 만료된 이미지를 알아보고 대체 이미지를 보여 줬습니다.</p></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Energy ================= -->
+<section class="project gutter" id="energy">
+  <div class="inner">
+    <aside class="p-side">
+      <div class="p-card navy"><span>PROJECT</span><b>EN-24</b></div>
+      <dl class="idl"><div><dt>PERIOD</dt><dd>2024.07 – 2026.03</dd></div><div><dt>ROLE</dt><dd>풀스택 개발·운영</dd></div><div><dt>TEAM</dt><dd>2024.10부터 단독</dd></div><div><dt>SCALE</dt><dd>317억 원 · 3개 단지 · 약 38개 공장</dd></div><div><dt>COMMIT</dt><dd>약 160건 · 저장소 9개+</dd></div></dl>
+    </aside>
+    <div class="p-main">
+      <div class="p-head">
+        <h2>산업단지 에너지 공유거래 플랫폼</h2>
+        <p class="sum">한국에너지기술평가원(KETEP) 국가 R&amp;D 과제에서 산업단지 공장끼리 스팀과 압축공기를 사고파는 거래 플랫폼입니다. 4년간 담당하던 개발자가 퇴사한 뒤 인수인계 없이 넘겨받아, 실증 운영부터 공인시험, 최종 산출물 작성, 최종평가 통과까지 혼자 맡았습니다.</p>
+          <p class="note">넘겨받을 때 git, 개발서버, 운영서버의 코드가 모두 달라서 운영 서버의 jar에서 소스를 복원해 실제로 돌고 있는 코드부터 찾았습니다.</p>
+      </div>
+
+    <div class="sec">
+      <h3>서비스 기능<small>Features</small></h3>
+      <div class="features">
+        <div class="feature"><b>거래방 · 매도 · 매수<span class="own">정비</span></b><p>거래 기간과 단가를 정한 거래방을 열고, 남는 공장이 매도 등록하면 필요한 공장이 매수합니다.</p></div>
+        <div class="feature"><b>중개거래<span class="own">담당</span></b><p>매도공장 → 중개공장 → 매수공장으로 이어지는 거래를 한 번에 만듭니다.</p></div>
+        <div class="feature"><b>정산 · 전력과금 분배<span class="own">담당</span></b><p>계측 사용량으로 공장별 판매량과 요금을 계산하고, 공급량을 보정합니다.</p></div>
+        <div class="feature"><b>청구서 자동 발송<span class="own">담당</span></b><p>엑셀 템플릿으로 청구서·명세서를 만들어 PDF로 바꾸고 메일로 보냅니다.</p></div>
+        <div class="feature"><b>예측단가<span class="own">신규</span></b><p>같은 계절 3년치 데이터로 그룹별 예측단가를 계산해 매도 등록 화면에 보여 줍니다.</p></div>
+        <div class="feature"><b>블록체인 거래 기록<span class="own">담당</span></b><p>거래·정산 데이터를 Hyperledger Fabric에 기록하고 계약 원장을 조회합니다.</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>시스템 아키텍처<small>Architecture</small></h3>
+      <figure class="arch" style="margin:0">
+        <div class="scroll">
+          <svg viewBox="0 0 1000 440" role="img" aria-labelledby="en-t">
+            <title id="en-t">에너지 공유거래 플랫폼 구성도. 공장 계측기 데이터가 계측 수신 서버를 거쳐 MySQL에 쌓이고, 웹과 배치 7종이 거래·정산·청구·메일·블록체인 기록을 처리한다.</title>
+            <defs><marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7d8aa5"/></marker></defs>
+            <text class="col" x="20" y="18">FIELD · USERS</text><text class="col" x="230" y="18">COLLECT · WEB</text><text class="col" x="470" y="18">DATA</text><text class="col" x="660" y="18">BATCH · JAVA SPRING BOOT</text>
+
+            <rect x="20" y="40" width="170" height="60" rx="8" class="ext"/>
+            <text class="t" x="34" y="64">공장 계측기</text><text class="s" x="34" y="84">FEMS · 3개 실증단지</text>
+            <rect x="20" y="176" width="170" height="60" rx="8" class="ext"/>
+            <text class="t" x="34" y="200">운영자 · 공장</text><text class="s" x="34" y="220">Admin · 그룹 · Source/Sink</text>
+            <rect x="20" y="330" width="170" height="56" rx="8" class="ext"/>
+            <text class="t" x="34" y="354">공장 담당자 메일</text><text class="s" x="34" y="372">청구서 · 리포트</text>
+
+            <rect x="230" y="40" width="190" height="60" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="244" y="64">Tag Receive Server</text><text class="s" x="244" y="84">계측 수신 · 병렬 전송</text>
+            <rect x="230" y="160" width="190" height="92" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="244" y="186">tessweb</text>
+            <text class="s" x="244" y="206">Node.js · Express · EJS</text>
+            <text class="s" x="244" y="224">거래 · 정보관리 · 정산</text>
+            <text class="s" x="244" y="242">대시보드 · 모니터링</text>
+
+            <rect x="470" y="130" width="140" height="120" rx="8" class="team"/>
+            <text class="t" x="486" y="172">MySQL</text>
+            <text class="s" x="486" y="192">mybatis XML</text>
+            <text class="s" x="486" y="210">Redis 세션</text>
+
+            <g>
+              <rect x="660" y="30" width="320" height="40" rx="7" fill="#ffffff" stroke="#2b59d9" stroke-width="1.5" stroke-dasharray="5 3"/><text class="t" x="674" y="55">거래 등록 배치</text><text class="s" x="870" y="55">일부 수정</text>
+              <rect x="660" y="78" width="320" height="40" rx="7" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/><text class="t" x="674" y="103">정산 배치</text><text class="s" x="870" y="103">판매량·요금</text>
+              <rect x="660" y="126" width="320" height="40" rx="7" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/><text class="t" x="674" y="151">예측단가 배치</text><text class="s" x="870" y="151">신규 개발</text>
+              <rect x="660" y="174" width="320" height="40" rx="7" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/><text class="t" x="674" y="199">청구서 · 명세서</text><text class="s" x="870" y="199">POI → PDF</text>
+              <rect x="660" y="222" width="320" height="40" rx="7" fill="#ffffff" stroke="#2b59d9" stroke-width="1.5" stroke-dasharray="5 3"/><text class="t" x="674" y="247">월간 리포트</text><text class="s" x="870" y="247">Spring Batch</text>
+              <rect x="660" y="270" width="320" height="40" rx="7" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/><text class="t" x="674" y="295">메일 발송</text><text class="s" x="870" y="295">1분 5건</text>
+              <rect x="660" y="330" width="320" height="56" rx="7" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/><text class="t" x="674" y="354">블록체인 게이트웨이</text><text class="s" x="674" y="373">Hyperledger Fabric 2.2 · 체인코드</text>
+            </g>
+
+            <path class="e" d="M190 70 H226" marker-end="url(#m2)"/>
+            <path class="e" d="M190 206 H226" marker-end="url(#m2)"/>
+            <path class="e" d="M420 70 H540 V126" marker-end="url(#m2)"/>
+            <path class="e" d="M420 200 H466" marker-end="url(#m2)"/>
+            <path class="e" d="M610 190 H636" />
+            <path class="e" d="M636 50 V290"/>
+            <path class="e" d="M636 50 H656" marker-end="url(#m2)"/><path class="e" d="M636 98 H656" marker-end="url(#m2)"/><path class="e" d="M636 146 H656" marker-end="url(#m2)"/><path class="e" d="M636 194 H656" marker-end="url(#m2)"/><path class="e" d="M636 242 H656" marker-end="url(#m2)"/><path class="e" d="M636 290 H656" marker-end="url(#m2)"/>
+            <path class="e" d="M660 300 H640 V320 H210 V350 H194" marker-end="url(#m2)"/>
+            <text class="el" x="430" y="314">SMTP</text>
+            <path class="e d" d="M325 100 V140 H448 V358 H656" marker-end="url(#m2)"/>
+            <path class="e d" d="M325 252 V358 H448" />
+            <text class="el" x="456" y="350">거래·정산 기록</text>
+
+            <rect x="20" y="402" width="960" height="30" rx="6" fill="#ffffff" stroke="#cbd3e1"/>
+            <text class="s" x="34" y="421">검증</text>
+            <text class="k" x="100" y="421" fill="#2a3442">TTA 공인시험 2025.05 · 거래 기능 정확도 100% · 측정 정확도 100% (목표 98%)</text>
+          </svg>
+        </div>
+        <figcaption class="legend"><span><i class="lg-mine"></i>개발·주로 수정</span><span><i class="lg-part"></i>일부 수정</span><span><i class="lg-team"></i>기존 구성</span><span><i class="lg-ext"></i>외부·사용자</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="sec">
+      <h3>기술 스택<small>Stack</small></h3>
+      <dl class="stack">
+        <div><dt>사용 언어</dt><dd><span class="chip lang">JavaScript (Node.js)</span><span class="chip lang">Java 8</span><span class="chip lang">SQL (MySQL)</span></dd></div>
+        <div><dt>웹</dt><dd><span class="chip">Express</span><span class="chip">EJS</span><span class="chip">jQuery</span><span class="chip">DataTables</span><span class="chip">FusionCharts</span><span class="chip">Passport · JWT</span></dd></div>
+        <div><dt>배치</dt><dd><span class="chip">Spring Boot 2</span><span class="chip">Spring Batch</span><span class="chip">JPA</span><span class="chip">Quartz</span><span class="chip">Maven · Gradle</span></dd></div>
+        <div><dt>데이터</dt><dd><span class="chip">MySQL</span><span class="chip">mybatis-mapper</span><span class="chip">Redis</span></dd></div>
+        <div><dt>문서·메일</dt><dd><span class="chip">Apache POI</span><span class="chip">LibreOffice · JODConverter</span><span class="chip">JavaMail</span></dd></div>
+        <div><dt>블록체인</dt><dd><span class="chip">Hyperledger Fabric 2.2</span><span class="chip">Fabric SDK for Java</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="sec">
+      <h3>해결한 문제<small>Problems</small></h3>
+      <div class="probs">
+        <div class="prob"><p class="q">인수인계 없이 받았는데 git, 개발서버, 운영서버 코드가 모두 다르다</p><p class="a">운영 jar에서 소스를 복원해 대조하고, 실제로 돌고 있는 코드를 기준으로 고쳐 배포했습니다.</p></div>
+        <div class="prob"><p class="q">중개거래 단가 하나를 고치면 모든 거래의 단가가 함께 바뀐다</p><p class="a">일괄 수정 쿼리에 빠진 조건을 넣어 해당 거래만 바뀌게 했습니다.</p></div>
+        <div class="prob"><p class="q">여러 공장에서 산 공장의 정산이 한 공장에서 산 것으로 잡힌다</p><p class="a">매도공장을 찾는 쿼리의 GROUP BY 기준을 바로잡았습니다.</p></div>
+        <div class="prob"><p class="q">계측 데이터를 블록체인에 보내느라 저장이 늦어진다</p><p class="a">블록체인 전송을 스레드풀(10개)로 나눠 병렬로 처리했습니다.</p></div>
+        <div class="prob"><p class="q">운영자 계정에 다른 산업단지의 결산 내역이 보인다</p><p class="a">계정 유형별로 조회 조건을 넣어 자기 범위만 보이게 했습니다.</p></div>
+        <div class="prob"><p class="q">메일이 한꺼번에 몰리고 한글 제목이 깨진다</p><p class="a">1분에 5건씩 큐를 가져오게 하고 제목 인코딩을 고쳤습니다.</p></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Passkey ================= -->
+<section class="project gutter" id="passkey">
+  <div class="inner">
+    <aside class="p-side">
+      <div class="p-card navy"><span>PROJECT</span><b>PK-24</b></div>
+      <dl class="idl"><div><dt>PERIOD</dt><dd>2024.03 – 2024.07</dd></div><div><dt>ROLE</dt><dd>프론트엔드</dd></div><div><dt>USERS</dt><dd>통신사·고객사 관리자, 회원</dd></div><div><dt>PART</dt><dd>관리 화면, 공통 컴포넌트</dd></div><div><dt>COMMIT</dt><dd>약 200건</dd></div></dl>
+    </aside>
+    <div class="p-main">
+      <div class="p-head">
+        <h2>대형 통신사 패스키 SaaS 관리자 포털</h2>
+        <p class="sum">패스키(비밀번호 없는 로그인) 서비스를 도입한 고객사와 통신사 관리자가 회원, 권한, 메뉴, 공지, 알림을 관리하는 B2B 관리자 포털입니다. 입사 후 첫 프로젝트로 프론트엔드를 맡았습니다.</p>
+      </div>
+
+    <div class="sec">
+      <h3>서비스 기능<small>Features</small></h3>
+      <div class="features">
+        <div class="feature"><b>회원 관리<span class="own">담당</span></b><p>회원 목록·상세 검색, 초대, 정보·권한 수정, 계정 삭제.</p></div>
+        <div class="feature"><b>권한 · 메뉴 관리<span class="own">담당</span></b><p>메뉴별 세부 권한 설정. 메뉴를 바꾸면 사이드 메뉴에 바로 반영됩니다.</p></div>
+        <div class="feature"><b>사용자 유형별 화면<span class="own">담당</span></b><p>통신사 관리자, 고객사 관리자, 회원마다 보이는 메뉴와 기능을 나눕니다.</p></div>
+        <div class="feature"><b>공지 · FAQ · 약관<span class="own">담당</span></b><p>세 게시판의 작성·수정·삭제와 첨부파일. 공통 컴포넌트로 함께 씁니다.</p></div>
+        <div class="feature"><b>공지 팝업<span class="own">담당</span></b><p>노출 기간과 대상, 순서를 정해 최대 5개까지 띄웁니다.</p></div>
+        <div class="feature"><b>실시간 알림<span class="own">담당</span></b><p>헤더에서 새 알림을 주기적으로 확인하고, 읽음과 일괄 읽기를 처리합니다.</p></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h3>시스템 아키텍처<small>Architecture</small></h3>
+      <figure class="arch" style="margin:0">
+        <div class="scroll">
+          <svg viewBox="0 0 1000 250" role="img" aria-labelledby="pk-t">
+            <title id="pk-t">패스키 관리자 포털 구성도. 세 종류의 사용자가 Vue 관리자 포털을 쓰고, 포털이 Spring Boot 백엔드를 거쳐 PostgreSQL과 패스키 인증 서비스에 연결된다.</title>
+            <defs><marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7d8aa5"/></marker></defs>
+            <text class="col" x="20" y="18">USERS</text><text class="col" x="250" y="18">ADMIN PORTAL</text><text class="col" x="530" y="18">BACKEND</text><text class="col" x="790" y="18">DATA · AUTH</text>
+            <rect x="20" y="36" width="170" height="44" rx="8" class="ext"/><text class="t" x="34" y="63">통신사 관리자</text>
+            <rect x="20" y="92" width="170" height="44" rx="8" class="ext"/><text class="t" x="34" y="119">고객사(RP) 관리자</text>
+            <rect x="20" y="148" width="170" height="44" rx="8" class="ext"/><text class="t" x="34" y="175">일반 회원</text>
+
+            <rect x="250" y="40" width="220" height="148" rx="8" fill="#e9effc" stroke="#2b59d9" stroke-width="1.5"/>
+            <text class="t" x="266" y="66">관리자 포털</text>
+            <text class="s" x="266" y="86">Vue 3 · Vite · Pinia</text>
+            <text class="s" x="266" y="108">· 권한 확인 공통 모듈</text>
+            <text class="s" x="266" y="126">· Tabulator 표 · 검색</text>
+            <text class="s" x="266" y="144">· 게시판 공통 컴포넌트</text>
+            <text class="s" x="266" y="162">· 알림 polling</text>
+
+            <rect x="530" y="40" width="210" height="64" rx="8" class="team"/><text class="t" x="544" y="66">Portal API</text><text class="s" x="544" y="86">Spring Boot 3 · WebFlux</text>
+            <rect x="530" y="128" width="210" height="60" rx="8" class="team"/><text class="t" x="544" y="152">Credential Manager</text><text class="s" x="544" y="170">Chrome 확장</text>
+
+            <rect x="790" y="40" width="190" height="64" rx="8" class="team"/><text class="t" x="804" y="66">PostgreSQL</text><text class="s" x="804" y="86">R2DBC</text>
+            <rect x="790" y="128" width="190" height="60" rx="8" class="ext"/><text class="t" x="804" y="152">패스키 인증</text><text class="s" x="804" y="170">FIDO2 / WebAuthn</text>
+
+            <path class="e" d="M190 58 H220 V114 H246" marker-end="url(#m1)"/><path class="e" d="M190 114 H246"/><path class="e" d="M190 170 H220 V114"/>
+            <path class="e" d="M470 72 H526" marker-end="url(#m1)"/><text class="el" x="478" y="64">REST · axios</text>
+            <path class="e" d="M740 72 H786" marker-end="url(#m1)"/>
+            <path class="e d" d="M786 158 H744" marker-end="url(#m1)"/>
+            <path class="e d" d="M635 104 V124" />
+
+            <rect x="20" y="212" width="960" height="30" rx="6" fill="#ffffff" stroke="#cbd3e1"/>
+            <text class="s" x="34" y="231">UI</text>
+            <text class="k" x="80" y="231" fill="#2a3442">Bootstrap 5 · Tabulator · Toast UI Editor · SweetAlert2 · dayjs</text>
+          </svg>
+        </div>
+        <figcaption class="legend"><span><i class="lg-mine"></i>내가 만든 부분</span><span><i class="lg-team"></i>다른 팀원</span><span><i class="lg-ext"></i>사용자·외부</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="sec">
+      <h3>기술 스택<small>Stack</small></h3>
+      <dl class="stack">
+        <div><dt>사용 언어</dt><dd><span class="chip lang">JavaScript</span><span class="chip lang">Vue SFC</span><span class="chip lang">CSS · SCSS</span></dd></div>
+        <div><dt>화면</dt><dd><span class="chip">Vue 3 Composition API</span><span class="chip">Vite</span><span class="chip">Vue Router</span><span class="chip">Pinia</span></dd></div>
+        <div><dt>UI</dt><dd><span class="chip">Tabulator</span><span class="chip">Toast UI Editor</span><span class="chip">Bootstrap 5</span><span class="chip">SweetAlert2</span></dd></div>
+        <div><dt>통신</dt><dd><span class="chip">axios 공통 인스턴스</span><span class="chip">REST API 연동</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="sec">
+      <h3>해결한 문제<small>Problems</small></h3>
+      <div class="probs">
+        <div class="prob"><p class="q">로그아웃한 뒤에도 알림 확인 요청이 계속 나간다</p><p class="a">로그아웃할 때 주기 확인을 멈추고, 겹치는 요청이 나가지 않게 했습니다.</p></div>
+        <div class="prob"><p class="q">페이지마다 권한 체크 코드가 반복된다</p><p class="a">권한 확인을 공통 모듈로 분리해 모든 페이지가 같은 방식으로 쓰게 했습니다.</p></div>
+        <div class="prob"><p class="q">FAQ 목록에 이미지가 base64 글자로 그대로 보인다</p><p class="a">목록에서는 본문의 이미지 데이터를 걸러 내고 보이도록 처리했습니다.</p></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<main id="edu-view" hidden>
+<section class="block gutter" aria-labelledby="ed-h">
+  <div class="inner">
+    <div class="sh"><h2 id="ed-h">Education</h2><svg aria-hidden="true"><use href="#ticket"/></svg></div>
+    <p class="ed-intro">학교와 두 곳의 교육기관에서 배우고 만든 것을 모았습니다. 실무 프로젝트는 <a href="#project">메인 페이지</a>에 있습니다.</p>
+  </div>
+</section>
+
+<section class="project gutter" aria-labelledby="ed1">
+  <div class="inner">
+    <aside class="p-side">
+      <div class="p-card navy"><span>SCHOOL</span><b>2019 – 2021</b></div>
+      <dl class="idl"><div><dt>SCHOOL</dt><dd>안산대학교</dd></div><div><dt>MAJOR</dt><dd>IT응용보안</dd></div><div><dt>GPA</dt><dd>4.23 / 4.5</dd></div><div><dt>PERIOD</dt><dd>2019.03 – 2021.02</dd></div></dl>
+    </aside>
+    <div class="p-main">
+      <div class="p-head"><h2 id="ed1">안산대학교 IT응용보안과</h2><p class="sum">C, Java, Python 같은 기초 언어와 데이터베이스, 프로그램 보안, 컴퓨터 포렌식을 배웠고, 앱과 하드웨어를 다루는 프로젝트를 했습니다.</p></div>
+      <div class="sec">
+        <h3>졸업작품 <small>Graduation project</small></h3>
+        <div class="ed-feature">
+          <div class="bf-top"><b>출입 관리용 얼굴인식 도어락</b><span class="d">2020 – 2021 · 팀</span></div>
+          <p>코로나 확산으로 출입문을 손으로 만지는 일을 줄이고자, 얼굴을 인식해 문을 여는 비접촉 출입 관리 시스템을 팀원들과 만들었습니다. 멘토와 함께 한이음 프로젝트 경진대회에 참여했습니다.</p>
+          <div class="tools"><span class="tool">Raspberry Pi</span><span class="tool">얼굴 인식</span><span class="tool">한이음 경진대회</span></div>
+        </div>
+      </div>
+      <div class="sec">
+        <h3>수업 프로젝트 <small>Coursework</small></h3>
+        <div class="features">
+          <div class="feature"><b>안드로이드 앱</b><p>Java와 Android Studio로 앱을 만들었습니다.</p></div>
+          <div class="feature"><b>EV3 로봇 제어</b><p>EV3로 로봇 하드웨어를 제어했습니다.</p></div>
+          <div class="feature"><b>Node.js 웹</b><p>처음 웹 개발을 Node.js로 시작했습니다.</p></div>
+          <div class="feature"><b>보안·포렌식</b><p>프로그램 보안, 컴퓨터 포렌식, 데이터베이스 과목.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project gutter" aria-labelledby="ed2">
+  <div class="inner">
+    <aside class="p-side">
+      <div class="p-card"><span>TRAINING</span><b>2021</b></div>
+      <dl class="idl"><div><dt>PLACE</dt><dd>솔데스크</dd></div><div><dt>PERIOD</dt><dd>2021.02 – 2021.07</dd></div><div><dt>FOCUS</dt><dd>Java 백엔드 · Python 데이터</dd></div></dl>
+    </aside>
+    <div class="p-main">
+      <div class="p-head"><h2 id="ed2">자바 파이썬을 활용한 머신러닝 개발자</h2><p class="sum">JSP와 MVC 모델에서 Spring, Spring Boot로 이어지는 웹 개발 흐름을 배우고, Python으로 Django, 크롤링, 데이터 분석, 머신러닝을 익혔습니다.</p></div>
+      <div class="sec">
+        <h3>프로젝트 <small>Projects</small></h3>
+        <div class="ed-feature">
+          <div class="bf-top"><b>도서 구매 사이트</b><span class="d">2021.07 · 팀</span></div>
+          <p>클라이언트와 서버를 구성해 만든 도서 판매 사이트입니다. 회원가입과 로그인, 도서 목록과 상세, 장바구니, 주문을 만들고, 관리자 계정으로 도서를 등록하면 바로 판매 목록에 올라가도록 했습니다.</p>
+          <div class="tools"><span class="tool">Java 8</span><span class="tool">Spring Boot 2.4</span><span class="tool">Oracle 11g</span><span class="tool">MyBatis</span><span class="tool">JSP · Ajax</span><span class="tool">Bootstrap</span></div>
+          <p class="links"><a href="https://github.com/pigret95/team5_v2sbm3c_git" target="_blank" rel="noopener">팀 저장소</a></p>
+        </div>
+        <div class="features">
+          <div class="feature"><b>뉴스 기사 사이트</b><p>Python 크롤링으로 뉴스 기사를 모아 보여 주는 사이트.</p></div>
+          <div class="feature"><b>데이터 분석·머신러닝</b><p>Django, 데이터 분석, 딥러닝과 머신러닝 실습.</p></div>
+        </div>
+      </div>
+      <div class="sec">
+        <h3>배운 것 <small>Curriculum</small></h3>
+        <div class="tools"><span class="tool">JSP</span><span class="tool">MVC</span><span class="tool">Spring</span><span class="tool">Spring Boot</span><span class="tool">MyBatis</span><span class="tool">jQuery · Ajax</span><span class="tool">MariaDB</span><span class="tool">MySQL</span><span class="tool">Django</span><span class="tool">크롤링</span><span class="tool">세션·쿠키 로그인</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project gutter" aria-labelledby="ed3">
+  <div class="inner">
+    <aside class="p-side">
+      <div class="p-card"><span>TRAINING</span><b>2023 – 2024</b></div>
+      <dl class="idl"><div><dt>PLACE</dt><dd>안산 라인컴퓨터아트학원</dd></div><div><dt>PERIOD</dt><dd>2023.08 – 2024.02</dd></div><div><dt>FOCUS</dt><dd>프론트엔드 · Node.js</dd></div></dl>
+    </aside>
+    <div class="p-main">
+      <div class="p-head"><h2 id="ed3">공공 데이터를 활용한 Node.js 전문가</h2><p class="sum">React, Vue, Next.js 같은 프레임워크와 Node.js, PHP 서버, Firebase와 Naver Cloud를 이용해 여러 웹 서비스를 만들었습니다. 이 과정을 마치고 지금 회사에 입사했습니다.</p></div>
+      <div class="sec">
+        <h3>프로젝트 <small>Projects</small></h3>
+        <div class="ed-grid">
+          <article class="ed-card"><div class="bf-top"><b>Trend Device</b><span class="d">2023.10 – 11 · 팀</span></div><p>휴대폰 성능 비교와 최신 기기 정보, 회원가입·마이페이지, 커뮤니티·토론 게시판.</p><div class="tools"><span class="tool">PHP</span><span class="tool">MySQL</span><span class="tool">JavaScript</span><span class="tool">Sass</span></div><p class="links"><a href="https://github.com/SeoEugene/webs2024/tree/main/TDsite" target="_blank" rel="noopener">코드</a></p></article>
+          <article class="ed-card"><div class="bf-top"><b>Find English</b><span class="d">2023.11 · 개인</span></div><p>YouTube API로 영어 공부용 채널과 오늘의 영상을 추천하고, 검색과 바로 재생을 제공합니다.</p><div class="tools"><span class="tool">React</span><span class="tool">YouTube API</span><span class="tool">Axios</span><span class="tool">Swiper</span></div><p class="links"><a href="https://github.com/SeoEugene/EnglishChannel_with_YOUTUBEAPI" target="_blank" rel="noopener">코드</a></p></article>
+          <article class="ed-card"><div class="bf-top"><b>Cinematic</b><span class="d">2023.11 – 12 · 개인</span></div><p>TMDB API로 영화 순위와 검색을 제공하고, 영화에 어울리는 음식을 추천합니다.</p><div class="tools"><span class="tool">Vue</span><span class="tool">TMDB API</span><span class="tool">Vercel</span></div><p class="links"><a href="https://cinematic-six.vercel.app" target="_blank" rel="noopener">사이트</a><a href="https://github.com/SeoEugene/CinematicTable" target="_blank" rel="noopener">코드</a></p></article>
+          <article class="ed-card"><div class="bf-top"><b>English Diary</b><span class="d">2023.11 – 12 · 팀</span></div><p>영어 일기 작성, 모르는 단어 검색, 틀린 표현 확인, 일기 검색, 단어장.</p><div class="tools"><span class="tool">React</span><span class="tool">Node.js</span><span class="tool">MongoDB</span><span class="tool">Firebase</span></div><p class="links"><a href="https://github.com/kiwowki/KiCanDiary" target="_blank" rel="noopener">팀 저장소</a></p></article>
+          <article class="ed-card"><div class="bf-top"><b>Animation Portfolio</b><span class="d">2023.09 · 개인</span></div><p>Vite와 GSAP으로 스크롤과 화면 전환 애니메이션을 넣은 포트폴리오.</p><div class="tools"><span class="tool">Vite</span><span class="tool">GSAP</span></div><p class="links"><a href="https://eu-vite-project.netlify.app/" target="_blank" rel="noopener">사이트</a><a href="https://github.com/SeoEugene/vite-project" target="_blank" rel="noopener">코드</a></p></article>
+          <article class="ed-card"><div class="bf-top"><b>React Portfolio</b><span class="d">2023.12 – 2024.01 · 개인</span></div><p>배우고 만든 사이트를 모은 첫 웹 포트폴리오. 입사 지원 때 사용했습니다.</p><div class="tools"><span class="tool">React</span><span class="tool">framer-motion</span><span class="tool">GSAP</span><span class="tool">Vercel</span></div><p class="links"><a href="https://react-portfolio-nine-pi.vercel.app" target="_blank" rel="noopener">사이트</a><a href="https://github.com/SeoEugene/react-portfolio" target="_blank" rel="noopener">코드</a></p></article>
+        </div>
+      </div>
+      <div class="sec">
+        <h3>학습 기록 <small>Practice</small></h3>
+        <div class="features">
+          <div class="feature"><b>검색</b><p>indexOf, filter, sort 같은 문자열·배열 함수만으로 만든 검색. <a href="https://seoeugene.github.io/webs2024/javascript/search/" target="_blank" rel="noopener">보기</a></p></div>
+          <div class="feature"><b>애니메이션</b><p>GSAP ScrollTrigger의 pin으로 만든 화면 고정·전환 효과. <a href="https://seoeugene.github.io/webs2024/javascript/gsap/gsap12.html" target="_blank" rel="noopener">보기</a></p></div>
+          <div class="feature"><b>데이터 요청</b><p>XMLHttpRequest, fetch, jQuery ajax, axios로 외부 데이터 불러오기. <a href="https://seoeugene.github.io/webs2024/javascript/quiz/quizEffect07.html" target="_blank" rel="noopener">보기</a></p></div>
+          <div class="feature"><b>로그인·회원가입</b><p>localStorage, PHP·MySQL, Node.js·Firebase 세 가지 방식으로 구현.</p></div>
+          <div class="feature"><b>게시판</b><p>PHP, Node.js, Next.js로 만든 CRUD 게시판. MongoDB와 MySQL 사용.</p></div>
+          <div class="feature"><b>댓글·채팅</b><p>댓글과 채팅 기능 구현.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+
+<section class="block gutter" id="before" aria-labelledby="bf-h">
+  <div class="inner">
+    <div class="sh"><h2 id="bf-h">Education</h2><svg aria-hidden="true"><use href="#ticket"/></svg></div>
+    <a class="ed-teaser" href="#education">
+      <div><span class="lab">School · Training</span><b>학교와 교육기관에서 만든 프로젝트</b><p>얼굴인식 도어락 졸업작품, 도서 구매 사이트, Trend Device, Cinematic 등 입사 전 프로젝트와 학습 기록</p></div>
+      <span class="go">보기 →</span>
+    </a>
+  </div>
+</section>
+
+<footer class="gutter">
+  <div class="inner">
+    <div><b>SEO YUJIN</b><p>97.eugene.s@gmail.com · <a href="https://github.com/SeoEugene" target="_blank" rel="noopener">github.com/SeoEugene</a></p><p>기간과 커밋 수는 각 저장소의 커밋 기록을 기준으로 정리했습니다. 고객사 이름은 공개하지 않습니다.</p></div>
+    <svg aria-hidden="true"><use href="#ticket"/></svg>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var main = document.getElementById('top');
+  var edu = document.getElementById('edu-view');
+  function route() {
+    var onEdu = location.hash === '#education';
+    main.hidden = onEdu;
+    edu.hidden = !onEdu;
+    if (onEdu) window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
